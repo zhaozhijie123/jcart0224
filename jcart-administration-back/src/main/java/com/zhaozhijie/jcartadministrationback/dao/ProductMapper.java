@@ -3,6 +3,7 @@ package com.zhaozhijie.jcartadministrationback.dao;
 import com.github.pagehelper.Page;
 import com.zhaozhijie.jcartadministrationback.dto.out.ProductListOutDTO;
 import com.zhaozhijie.jcartadministrationback.po.Product;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

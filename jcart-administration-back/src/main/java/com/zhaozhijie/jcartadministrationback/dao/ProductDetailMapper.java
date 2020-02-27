@@ -1,6 +1,7 @@
 package com.zhaozhijie.jcartadministrationback.dao;
 
 import com.zhaozhijie.jcartadministrationback.po.ProductDetail;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
