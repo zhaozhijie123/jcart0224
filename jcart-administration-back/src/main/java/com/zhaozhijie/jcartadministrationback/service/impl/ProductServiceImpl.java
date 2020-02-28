@@ -46,6 +46,7 @@ public class ProductServiceImpl implements ProductService {
         productMapper.insertSelective(product);
 
         Integer productId = product.getProductId();
+        System.out.println(productId+"productId=**************************");
         ProductDetail productDetail = new ProductDetail();
         productDetail.setProductId(productId);
         productDetail.setDescription(productCreateInDTO.getDescription());

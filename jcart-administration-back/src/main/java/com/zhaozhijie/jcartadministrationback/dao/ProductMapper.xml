@@ -14,7 +14,7 @@
     <result column="reword_points" jdbcType="INTEGER" property="rewordPoints" />
     <result column="sort_order" jdbcType="INTEGER" property="sortOrder" />
   </resultMap>
-  <resultMap id="ProductListOutDTO" type="io.cjf.jcartadministrationback.dto.out.ProductListOutDTO">
+  <resultMap id="ProductListOutDTO" type="com.zhaozhijie.jcartadministrationback.dto.out.ProductListOutDTO">
     <id column="product_id" jdbcType="INTEGER" property="productId" />
     <result column="product_code" jdbcType="VARCHAR" property="productCode" />
     <result column="product_name" jdbcType="VARCHAR" property="productName" />
@@ -48,7 +48,7 @@
       #{stockQuantity,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{mainPicUrl,jdbcType=VARCHAR}, 
       #{rewordPoints,jdbcType=INTEGER}, #{sortOrder,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.zhaozhijie.jcartadministrationback.po.Product">
+  <insert id="insertSelective" parameterType="com.zhaozhijie.jcartadministrationback.po.Product" useGeneratedKeys="true" keyProperty="productId">
     insert into jcart_product
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="productCode != null">

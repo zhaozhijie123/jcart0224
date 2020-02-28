@@ -10,33 +10,33 @@
 </head>
 
 <body>
-<div id="app">
-    <el-table :data="pageInfo.list" style="width: 100%">
-        <el-table-column prop="mainPicUrl" label="主图">
-        </el-table-column>
-        <el-table-column prop="productCode" label="商品代码">
-        </el-table-column>
-        <el-table-column prop="productName" label="商品名称">
-        </el-table-column>
-        <el-table-column prop="price" label="价格">
-        </el-table-column>
-        <el-table-column prop="discount" label="打折">
-        </el-table-column>
-        <el-table-column prop="stockQuantity" label="库存">
-        </el-table-column>
-        <el-table-column prop="status" label="状态">
-        </el-table-column>
-    </el-table>
-    
-    <el-pagination layout="prev, pager, next" :total="pageInfo.total" @current-change="handlePageChange">
-    </el-pagination>
-</div>
+    <div id="app">
+        <el-table :data="pageInfo.list" style="width: 100%">
+            <el-table-column prop="mainPicUrl" label="主图">
+            </el-table-column>
+            <el-table-column prop="productCode" label="商品代码">
+            </el-table-column>
+            <el-table-column prop="productName" label="商品名称">
+            </el-table-column>
+            <el-table-column prop="price" label="价格">
+            </el-table-column>
+            <el-table-column prop="discount" label="打折">
+            </el-table-column>
+            <el-table-column prop="stockQuantity" label="库存">
+            </el-table-column>
+            <el-table-column prop="status" label="状态">
+            </el-table-column>
+        </el-table>
 
-<script src="assets/js/axios.min.js"></script>
-<script src="assets/js/common.js"></script>
-<script src="assets/js/vue.js"></script>
-<script src="assets/js/elementui.js"></script>
-<script src="viewmodels/demo.js"></script>
+        <el-pagination layout="prev, pager, next" :total="pageInfo.total" @current-change="handlePageChange">
+        </el-pagination>
+    </div>
+
+    <script src="assets/js/axios.min.js"></script>
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/vue.js"></script>
+    <script src="assets/js/elementui.js"></script>
+    <script src="viewmodels/product-search.js"></script>
 
 </body>
 

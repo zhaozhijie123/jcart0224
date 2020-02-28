@@ -79,6 +79,7 @@
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
+
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.zhaozhijie.jcartadministrationback.po.Order">
     update jcart_order

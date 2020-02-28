@@ -32,6 +32,7 @@ var app = new Vue({
             alert('productId is null');
             return;
         }
+
         this.getProductById();
     },
     methods: {

@@ -17,7 +17,7 @@ var app = new Vue({
         statuses: [
             { value: 0, label: '下架' },
             { value: 1, label: '上架' },
-            { value: 2, label: '待审核' }       
+            { value: 2, label: '待审核' }
         ],
         mainFileList: [],
         otherFileList: []
@@ -82,7 +82,7 @@ var app = new Vue({
                     })
                     .catch(function (error) {
                         console.log(error);
-                        alert('上传失败');
+                        alert('上床失败');
                     });
             });
 
