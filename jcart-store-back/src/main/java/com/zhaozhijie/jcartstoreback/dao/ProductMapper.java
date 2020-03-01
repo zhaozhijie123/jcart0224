@@ -1,5 +1,7 @@
 package com.zhaozhijie.jcartstoreback.dao;
 
+import com.github.pagehelper.Page;
+import com.zhaozhijie.jcartstoreback.dto.out.ProductListOutDTO;
 import com.zhaozhijie.jcartstoreback.po.Product;
 
 public interface ProductMapper {
@@ -14,4 +16,6 @@ public interface ProductMapper {
     int updateByPrimaryKeySelective(Product record);
 
     int updateByPrimaryKey(Product record);
+
+    Page<ProductListOutDTO> search();
 }
