@@ -1,7 +1,9 @@
 package com.zhaozhijie.jcartstoreback.dao;
 
 import com.zhaozhijie.jcartstoreback.po.Return;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ReturnMapper {
     int deleteByPrimaryKey(Integer returnId);
 
