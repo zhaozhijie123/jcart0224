@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/product")
+@CrossOrigin
 public class ProductController {
 
     @Autowired
     private ProductService productService;
 
     @GetMapping("/search")
-    public PageOutDTO<ProductListOutDTO> search(@RequestBody ProductSearchInDTO productSearchInDTO,
+    public PageOutDTO<ProductListOutDTO> search(ProductSearchInDTO productSearchInDTO,
                                                   @RequestParam(required = false,defaultValue = "1") Integer pageNum){
         Page<ProductListOutDTO> page = productService.search(pageNum);
         PageOutDTO<ProductListOutDTO> pageOutDTO = new PageOutDTO<>();
@@ -26,11 +27,12 @@ public class ProductController {
         pageOutDTO.setPageSize(page.getPageSize());
         pageOutDTO.setPageNum(page.getPageNum());
         pageOutDTO.setList(page);
-
+        System.out.println("1111111111111111111111111111111111111");
         return pageOutDTO;
     }
     @GetMapping("/getById")
     public ProductShowOutDTO getById(@RequestParam Integer productId){
+        System.out.println(productId);
         ProductShowOutDTO productShowOutDTO = productService.getById(productId);
         return productShowOutDTO;
     }

@@ -46,7 +46,7 @@ public class AdministratorController {
     }
 
     @GetMapping("/getProfile")
-    public AdministratorGetProfileOutDTO getProfile(@RequestParam(required = false) Integer administratorId){
+    public AdministratorGetProfileOutDTO getProfile(@RequestAttribute Integer administratorId){
         Administrator administrator = administratorService.getById(administratorId);
         AdministratorGetProfileOutDTO administratorGetProfileOutDTO = new AdministratorGetProfileOutDTO();
         administratorGetProfileOutDTO.setAdministratorId(administrator.getAdministratorId());
