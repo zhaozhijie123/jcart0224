@@ -1,12 +1,12 @@
 var app = new Vue({
     el: '#app',
     data: {
+        administratorId: '',
         username: '',
         realName: '',
-        mobile: '',
         email: '',
-        mobileVerified: '',
-        emailVerified: ''
+        avatarUrl: '',
+        createTimestamp: ''
     },
     mounted() {
         console.log('view mounted');
@@ -18,26 +18,27 @@ var app = new Vue({
             this.updateMyProfile();
         },
         getMyProfile() {
-            axios.get('/customer/getProfile')
+            axios.get('/administrator/getProfile')
                 .then(function (response) {
                     console.log(response);
                     var me = response.data;
+                    app.administratorId = me.administratorId;
                     app.username = me.username;
                     app.realName = me.realName;
-                    app.mobile = me.mobile;
-                    app.mobileVerified = me.mobileVerified.toString();
                     app.email = me.email;
-                    app.emailVerified = me.emailVerified.toString();
+                    app.avatarUrl = me.avatarUrl;
+                    app.createTimestamp = me.createTimestamp;
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
         },
         updateMyProfile() {
-            axios.post('/customer/updateProfile', {
+            axios.post('/administrator/updateProfile', {
                 realName: this.realName,
-                mobile: this.mobile,
-                email: this.email
+                email: this.email,
+                avatarUrl: this.avatarUrl,
+
             })
                 .then(function (response) {
                     console.log(response);
