@@ -33,9 +33,9 @@ public class CustomerController {
     @Autowired
     private SecureRandom secureRandom;
 
-    @Autowired
+   /* @Autowired
     private JavaMailSender mailSender;
-
+*/
     @Value("${spring.mail.username}")
     private String fromEmail;
 
@@ -119,7 +119,7 @@ public class CustomerController {
         message.setTo(email);
         message.setSubject("jcart重置密码");
         message.setText(hex);
-        mailSender.send(message);
+        /*mailSender.send(message);*/
         emailPwdResetCodeMap.put("PwdResetCode"+email, hex);
     }
 
