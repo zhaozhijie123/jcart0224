@@ -36,4 +36,10 @@ public class AddressServiceImpl implements AddressService {
     public void delete(Integer addressId) {
         addressMapper.deleteByPrimaryKey(addressId);
     }
+
+    @Override
+    public Address getById(Integer addressId) {
+        Address address = addressMapper.selectByPrimaryKey(addressId);
+        return address;
+    }
 }

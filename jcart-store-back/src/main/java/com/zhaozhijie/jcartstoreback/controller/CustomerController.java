@@ -25,15 +25,12 @@ public class CustomerController {
 
     @PostMapping("/register")
     public Integer register(@RequestBody CustomerRegisterInDTO customerRegisterInDTO){
-        System.out.println(customerRegisterInDTO+"*****************");
         Integer customerId = customerService.register(customerRegisterInDTO);
         return customerId;
     }
 
     @GetMapping("/login")
     public CustomerLoginOutDTO login(CustomerLoginInDTO customerLoginInDTO) throws ClientException{
-        System.out.println(customerLoginInDTO.getUsername()+"********************************");
-        System.out.println(customerLoginInDTO.getPassword()+"********************************");
         Customer customer = customerService.getByUsername(customerLoginInDTO.getUsername());
         if (customer == null){
             throw new ClientException(ClientExceptionConstant.CUSTOMER_USERNAME_NOT_EXIST_ERRCODE, ClientExceptionConstant.CUSTOMER_USERNAME_NOT_EXIST_ERRMSG);

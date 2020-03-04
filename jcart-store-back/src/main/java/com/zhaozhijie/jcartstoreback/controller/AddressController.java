@@ -3,6 +3,7 @@ package com.zhaozhijie.jcartstoreback.controller;
 import com.zhaozhijie.jcartstoreback.dto.in.AddressCreateInDTO;
 import com.zhaozhijie.jcartstoreback.dto.in.AddressUpdateInDTO;
 import com.zhaozhijie.jcartstoreback.dto.out.AddressListOutDTO;
+import com.zhaozhijie.jcartstoreback.dto.out.AddressShowOutDTO;
 import com.zhaozhijie.jcartstoreback.po.Address;
 import com.zhaozhijie.jcartstoreback.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/address")
+@CrossOrigin
 public class AddressController {
 
     @Autowired
@@ -35,9 +37,23 @@ public class AddressController {
         return addressListOutDTOS;
     }
 
+    @GetMapping("/getById")
+    public AddressShowOutDTO getById(@RequestParam Integer addressId){
+        Address address = addressService.getById(addressId);
+        AddressShowOutDTO addressShowOutDTO = new AddressShowOutDTO();
+        addressShowOutDTO.setAddressId(address.getAddressId());
+        addressShowOutDTO.setTag(address.getTag());
+        addressShowOutDTO.setReceiverName(address.getReceiverName());
+        addressShowOutDTO.setReceiverMobile(address.getReceiverMobile());
+        addressShowOutDTO.setContent(address.getContent());
+
+        return addressShowOutDTO;
+    }
+
     @PostMapping("/create")
     public Integer create(@RequestBody AddressCreateInDTO addressCreateInDTO,
                           @RequestAttribute Integer customerId){
+        System.out.println(addressCreateInDTO.getReceiverName()+"******************");
         Address address = new Address();
         address.setCustomerId(customerId);
         address.setTag(addressCreateInDTO.getTag());
