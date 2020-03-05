@@ -60,4 +60,5 @@ public class Address {
     public void setTag(String tag) {
         this.tag = tag == null ? null : tag.trim();
     }
+
 }

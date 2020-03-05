@@ -1,9 +1,11 @@
 package com.zhaozhijie.jcartstoreback.dto.out;
 
+import com.zhaozhijie.jcartstoreback.vo.OrderProductVO;
+
 import java.util.List;
 
 public class OrderShowOutDTO {
-    private Integer orderId;
+    private Long orderId;
     private Byte status;
     private Double totalPrice;
     private Integer rewordPoints;
@@ -16,14 +18,14 @@ public class OrderShowOutDTO {
     private String invoiceAddress;
     private Double invoicePrice;
     private String comment;
-    private List<OrderProductOutDTO> orderProducts;
+    private List<OrderProductVO> orderProducts;
     private List<OrderHistoryListOutDTO> orderHistories;
 
-    public Integer getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
@@ -123,19 +125,19 @@ public class OrderShowOutDTO {
         this.comment = comment;
     }
 
-    public List<OrderProductOutDTO> getOrderProducts() {
-        return orderProducts;
-    }
-
-    public void setOrderProducts(List<OrderProductOutDTO> orderProducts) {
-        this.orderProducts = orderProducts;
-    }
-
     public List<OrderHistoryListOutDTO> getOrderHistories() {
         return orderHistories;
     }
 
     public void setOrderHistories(List<OrderHistoryListOutDTO> orderHistories) {
         this.orderHistories = orderHistories;
+    }
+
+    public List<OrderProductVO> getOrderProducts() {
+        return orderProducts;
+    }
+
+    public void setOrderProducts(List<OrderProductVO> orderProducts) {
+        this.orderProducts = orderProducts;
     }
 }

@@ -110,4 +110,21 @@ public class Product {
     public void setSortOrder(Integer sortOrder) {
         this.sortOrder = sortOrder;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productId=" + productId +
+                ", productCode='" + productCode + '\'' +
+                ", productName='" + productName + '\'' +
+                ", productAbstract='" + productAbstract + '\'' +
+                ", price=" + price +
+                ", discount=" + discount +
+                ", stockQuantity=" + stockQuantity +
+                ", status=" + status +
+                ", mainPicUrl='" + mainPicUrl + '\'' +
+                ", rewordPoints=" + rewordPoints +
+                ", sortOrder=" + sortOrder +
+                '}';
+    }
 }

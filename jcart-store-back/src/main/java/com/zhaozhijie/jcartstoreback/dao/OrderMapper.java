@@ -1,5 +1,6 @@
 package com.zhaozhijie.jcartstoreback.dao;
 
+import com.github.pagehelper.Page;
 import com.zhaozhijie.jcartstoreback.po.Order;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +17,6 @@ public interface OrderMapper {
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+
+    Page<Order> selectByCustomerId(Integer customerId);
 }

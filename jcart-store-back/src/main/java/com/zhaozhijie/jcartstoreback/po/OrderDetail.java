@@ -90,4 +90,19 @@ public class OrderDetail {
     public void setOrderProducts(String orderProducts) {
         this.orderProducts = orderProducts == null ? null : orderProducts.trim();
     }
+
+    @Override
+    public String toString() {
+        return "OrderDetail{" +
+                "orderId=" + orderId +
+                ", shipMethod=" + shipMethod +
+                ", shipAddress='" + shipAddress + '\'' +
+                ", shipPrice=" + shipPrice +
+                ", payMethod=" + payMethod +
+                ", invoiceAddress='" + invoiceAddress + '\'' +
+                ", invoicePrice=" + invoicePrice +
+                ", comment='" + comment + '\'' +
+                ", orderProducts='" + orderProducts + '\'' +
+                '}';
+    }
 }
