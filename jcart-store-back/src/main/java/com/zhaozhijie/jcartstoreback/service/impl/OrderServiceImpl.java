@@ -108,9 +108,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Page<Order> getByCustomerId(Integer pageNum, Integer customerId) {
-        PageHelper.startPage(pageNum, 10);
-        Page<Order> page = orderMapper.selectByCustomerId(customerId);
-        return page;
+
+        PageHelper.startPage(pageNum,10);
+        Page<Order> pages = orderMapper.selectByCustomerId(customerId);
+        return pages;
     }
 
     @Override
