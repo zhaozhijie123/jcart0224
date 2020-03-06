@@ -1,5 +1,6 @@
 package com.zhaozhijie.jcartadministrationback.dao;
 
+import com.github.pagehelper.Page;
 import com.zhaozhijie.jcartadministrationback.po.Customer;
 
 public interface CustomerMapper {
@@ -14,4 +15,6 @@ public interface CustomerMapper {
     int updateByPrimaryKeySelective(Customer record);
 
     int updateByPrimaryKey(Customer record);
+
+    Page<Customer> search();
 }
