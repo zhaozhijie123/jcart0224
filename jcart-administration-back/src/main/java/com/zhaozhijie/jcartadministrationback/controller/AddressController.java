@@ -5,23 +5,32 @@ import com.zhaozhijie.jcartadministrationback.dto.out.AddressShowOutDTO;
 import com.zhaozhijie.jcartadministrationback.po.Address;
 import com.zhaozhijie.jcartadministrationback.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/address")
+@CrossOrigin
 public class AddressController {
 
     @Autowired
     private AddressService addressService;
 
     @GetMapping("/getListByCustomerId")
-    public List<AddressListOutDTO> getListByCustomerId(Integer customerId){
-        return null;
+    public List<AddressListOutDTO> getListByCustomerId(@RequestParam Integer customerId){
+        List<Address> addresses = addressService.getByCustomerId(customerId);
+        List<AddressListOutDTO> addressListOutDTOS = addresses.stream().map(address -> {
+            AddressListOutDTO addressListOutDTO = new AddressListOutDTO();
+            addressListOutDTO.setAddressId(address.getAddressId());
+            addressListOutDTO.setReceiverName(address.getReceiverName());
+            addressListOutDTO.setReceiverMobile(address.getReceiverMobile());
+            addressListOutDTO.setContent(address.getContent());
+            addressListOutDTO.setTag(address.getTag());
+            return addressListOutDTO;
+        }).collect(Collectors.toList());
+        return addressListOutDTOS;
     }
 
     @GetMapping("/getById")
