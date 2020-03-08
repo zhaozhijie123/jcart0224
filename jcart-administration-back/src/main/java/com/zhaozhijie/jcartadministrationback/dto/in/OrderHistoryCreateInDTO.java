@@ -2,7 +2,7 @@ package com.zhaozhijie.jcartadministrationback.dto.in;
 
 public class OrderHistoryCreateInDTO {
     private Long orderId;
-    private Byte status;
+    private Byte orderStatus;
     private String comment;
     private Boolean customerNotified;
 
@@ -14,12 +14,12 @@ public class OrderHistoryCreateInDTO {
         this.orderId = orderId;
     }
 
-    public Byte getStatus() {
-        return status;
+    public Byte getOrderStatus() {
+        return orderStatus;
     }
 
-    public void setStatus(Byte status) {
-        this.status = status;
+    public void setOrderStatus(Byte orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     public String getComment() {
