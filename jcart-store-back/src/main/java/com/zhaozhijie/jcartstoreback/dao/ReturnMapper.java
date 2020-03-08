@@ -1,5 +1,6 @@
 package com.zhaozhijie.jcartstoreback.dao;
 
+import com.github.pagehelper.Page;
 import com.zhaozhijie.jcartstoreback.po.Return;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +17,6 @@ public interface ReturnMapper {
     int updateByPrimaryKeySelective(Return record);
 
     int updateByPrimaryKey(Return record);
+
+    Page<Return> selectPageByCustomerId(Integer customerId);
 }
