@@ -1,15 +1,15 @@
 package com.zhaozhijie.jcartadministrationback.dto.in;
 
 public class ReturnUpdateActionInDTO {
-    private Integer returnIdl;
+    private Integer returnId;
     private Byte action;
 
-    public Integer getReturnIdl() {
-        return returnIdl;
+    public Integer getReturnId() {
+        return returnId;
     }
 
-    public void setReturnIdl(Integer returnIdl) {
-        this.returnIdl = returnIdl;
+    public void setReturnId(Integer returnId) {
+        this.returnId = returnId;
     }
 
     public Byte getAction() {
