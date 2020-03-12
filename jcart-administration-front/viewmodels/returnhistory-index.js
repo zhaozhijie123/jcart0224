@@ -5,10 +5,10 @@ var app = new Vue({
         returnHistories: [],
         selectedReturnStatus: '',
         returnStatuses: [
+            { value: 0, label: '待处理' },
             { value: 1, label: '待取货' },
             { value: 2, label: '正在处理' },
-            { value: 3, label: '完成' },
-            { value: 4, label: '拒绝' }
+            { value: 3, label: '完成' }
         ],
         customerNotified: false,
         comment: ''
