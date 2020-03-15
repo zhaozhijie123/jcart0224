@@ -1,5 +1,7 @@
 const routes = [
     { path: '/administrator/updateprofile', component: AdministratorUpdateProfileRoutePage },
+    { path: '/administrator/search',component: AdministratorSearchRoutePage},
+    { path: '/administrator/create',component: AdministratorCreateRoutePage},
 
     { path: '/product/search',component: ProductSearchRoutePage},
     { path: '/product/create',component: ProductCreateRoutePage},
@@ -13,7 +15,6 @@ const routes = [
     { path: '/order/search',component: OrderSearchRoutePage},
     { path: '/order/show/:orderId',component: OrderShowRoutePage},
 
-    { path: '/administrator/search',component: AdministratorSearchRoutePage}
 ];
 
 const router = new VueRouter({
