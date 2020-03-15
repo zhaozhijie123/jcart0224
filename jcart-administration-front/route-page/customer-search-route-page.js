@@ -39,6 +39,7 @@ const CustomerSearchRoutePage = {
             </el-table-column>
             <el-table-column label="操作">
                 <template slot-scope="scope">
+                    <el-button type="primary" size="mini" @click="handleShowClick(scope.$index, scope.row)">详情</el-button>
                     <el-button type="primary" size="mini" @click="handleUpdateStatus(scope.$index, scope.row)">更新状态</el-button>
                 </template>
             </el-table-column>
@@ -77,6 +78,9 @@ methods: {
     handleUpdateStatus(index, row) {
         console.log('update status click');
         this.updateCustomerStatus(row.customerId, row.status);
+    },
+    handleShowClick(index, row) {
+        this.$router.push('/customer/show/' + row.customerId);
     },
     searchCustomer() {
         axios.get('/customer/search', {
