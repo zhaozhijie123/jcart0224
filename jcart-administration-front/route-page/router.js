@@ -16,6 +16,7 @@ const routes = [
     { path: '/order/search',component: OrderSearchRoutePage},
     { path: '/order/show/:orderId',component: OrderShowRoutePage},
 
+    { path: '/return/search', component: ReturnSearchRoutePage },
 ];
 
 const router = new VueRouter({
