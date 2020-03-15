@@ -1,7 +1,8 @@
 const ProductSearchRoutePage = {
   template: `
   <div id="app">
-        
+  <el-button type="primary" @click="handleCreateClick">添加商品</el-button>
+  <br><br>      
   <el-input v-model="productCode" placeholder="请输入商品代号"></el-input>
   <el-input v-model="productName" placeholder="请输入商品名称"></el-input>
   <el-input v-model="price" placeholder="请输入价格"></el-input>
@@ -39,6 +40,12 @@ const ProductSearchRoutePage = {
               {{statuses[scope.row.status].label}}
           </template>
       </el-table-column>
+      <el-table-column label="操作">
+                <template slot-scope="scope">
+                    <router-link :to="'/product/update/'+scope.row.productId">编辑</router-link>
+                    <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                </template>
+      </el-table-column>
   </el-table>
 
   <el-pagination layout="prev, pager, next" :total="pageInfo.total" @current-change="handlePageChange">
@@ -66,6 +73,13 @@ const ProductSearchRoutePage = {
     this.searchProduct();
 },
 methods: {
+    handleCreateClick(){
+        this.$router.push('/product/create');
+    },
+    handleEdit(index, row) {
+        console.log('product edit click', index, row);
+        this.$router.push('/product/update/' + row.productId);
+    },
     handlePageChange(val){
         console.log('page change');
         this.pageNum = val;
