@@ -17,6 +17,20 @@ const routes = [
     { path: '/order/show/:orderId',component: OrderShowRoutePage},
 
     { path: '/return/search', component: ReturnSearchRoutePage },
+    {
+        path: '/return/edit/:returnId',
+        component: ReturnEditRoutePage,
+        children: [
+            {
+                path: 'show',
+                component: ReturnShowRoutePage
+            },
+            {
+                path: 'history',
+                component: ReturnHistoryIndexRoutePage
+            }
+        ]
+    }
 ];
 
 const router = new VueRouter({
