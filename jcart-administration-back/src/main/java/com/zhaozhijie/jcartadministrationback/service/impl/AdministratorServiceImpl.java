@@ -12,6 +12,7 @@ import com.zhaozhijie.jcartadministrationback.service.AdministratorService;
 import com.zhaozhijie.jcartadministrationback.util.MailBean;
 import com.zhaozhijie.jcartadministrationback.util.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.xml.bind.DatatypeConverter;
@@ -30,6 +31,9 @@ public class AdministratorServiceImpl implements AdministratorService {
 
     @Autowired
     private SecureRandom secureRandom;
+
+    @Autowired
+    private RedisTemplate<String,String> redisTemplate;
 
     @Override
     public Administrator getById(Integer administratorId) {
@@ -96,14 +100,14 @@ public class AdministratorServiceImpl implements AdministratorService {
     }
 
     @Override
-    public void restPwd(AdministratorResetPwdInDTO administratorResetPwdInDTO, Map<String, String> emailPwdResetCodeMap) throws ClientException {
+    public void restPwd(AdministratorResetPwdInDTO administratorResetPwdInDTO) throws ClientException {
         String email = administratorResetPwdInDTO.getEmail();
         if (email == null) {
             throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_PWDRESET_EMAIL_NONE_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_PWDRESET_EMAIL_NONE_ERRMSG);
         }
 
         //获取邮箱里面的重置码
-        String innerResetCode = emailPwdResetCodeMap.get(email);
+        String innerResetCode = redisTemplate.opsForValue().get("EmailReset" + email);
         if (innerResetCode == null) {
             throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_PWDRESET_INNER_RESETCODE_NONE_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_PWDRESET_INNER_RESETCODE_NONE_ERRMSG);
         }
@@ -138,7 +142,7 @@ public class AdministratorServiceImpl implements AdministratorService {
         //修改当前管理员
         administratorMapper.updateByPrimaryKeySelective(administrator);
 
-        emailPwdResetCodeMap.remove(email);
-
+        //emailPwdResetCodeMap.remove(email);
+        redisTemplate.delete("EmailReset" + email);
     }
 }

@@ -11,12 +11,14 @@ import com.zhaozhijie.jcartadministrationback.po.Administrator;
 import com.zhaozhijie.jcartadministrationback.service.AdministratorService;
 import com.zhaozhijie.jcartadministrationback.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @RestController
@@ -30,7 +32,10 @@ public class AdministratorController {
     @Autowired
     private JWTUtil jwtUtil;
 
-    private Map<String, String> emailPwdResetCodeMap = new HashMap<>();
+    //private Map<String, String> emailPwdResetCodeMap = new HashMap<>();
+
+    @Autowired
+    private RedisTemplate<String,String> redisTemplate;
 
     @GetMapping("/login")
     public AdministratorLoginOutDTO login(AdministratorLoginInDTO administratorLoginInDTO) throws ClientException {
@@ -78,12 +83,13 @@ public class AdministratorController {
     public void getPwdResetCode(@RequestParam String email) throws ClientException {
         //获取重置码
         String hex = administratorService.getByEmail(email);
-        emailPwdResetCodeMap.put(email, hex);
+        //emailPwdResetCodeMap.put(email, hex);
+        redisTemplate.opsForValue().set("EmailReset"+email, hex, 1L, TimeUnit.MINUTES);
     }
 
     @PostMapping("/resetPwd")
     public void resetPwd(@RequestBody AdministratorResetPwdInDTO administratorResetPwdInDTO) throws ClientException{
-        administratorService.restPwd(administratorResetPwdInDTO,emailPwdResetCodeMap);
+        administratorService.restPwd(administratorResetPwdInDTO);
     }
 
     @GetMapping("/getList")

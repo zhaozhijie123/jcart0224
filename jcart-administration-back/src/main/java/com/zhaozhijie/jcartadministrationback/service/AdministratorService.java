@@ -26,5 +26,5 @@ public interface AdministratorService {
 
     String getByEmail(String email) throws ClientException;
 
-    void restPwd(AdministratorResetPwdInDTO administratorResetPwdInDTO, Map<String, String> emailPwdResetCodeMap) throws ClientException;
+    void restPwd(AdministratorResetPwdInDTO administratorResetPwdInDTO) throws ClientException;
 }
