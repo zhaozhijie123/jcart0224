@@ -11,6 +11,7 @@ import com.zhaozhijie.jcartadministrationback.po.Administrator;
 import com.zhaozhijie.jcartadministrationback.service.AdministratorService;
 import com.zhaozhijie.jcartadministrationback.util.MailBean;
 import com.zhaozhijie.jcartadministrationback.util.MailService;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,9 @@ public class AdministratorServiceImpl implements AdministratorService {
 
     @Autowired
     private RedisTemplate<String,String> redisTemplate;
+
+    @Autowired
+    private RocketMQTemplate rocketMQTemplate;
 
     @Override
     public Administrator getById(Integer administratorId) {
@@ -90,13 +94,8 @@ public class AdministratorServiceImpl implements AdministratorService {
         mailBean.setReceiver(email);
         mailBean.setSubject("jcart管理端管理员密码重置");
         mailBean.setContent(hex);
-        try {
-            mailService.sendSimpleMail(mailBean);
-            return hex;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "发送失败";
-        }
+        rocketMQTemplate.convertAndSend("SendPwdResetByEmail",mailBean);
+        return hex;
     }
 
     @Override

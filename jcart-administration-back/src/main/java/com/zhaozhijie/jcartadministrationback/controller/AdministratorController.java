@@ -10,6 +10,7 @@ import com.zhaozhijie.jcartadministrationback.exception.ClientException;
 import com.zhaozhijie.jcartadministrationback.po.Administrator;
 import com.zhaozhijie.jcartadministrationback.service.AdministratorService;
 import com.zhaozhijie.jcartadministrationback.util.JWTUtil;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
