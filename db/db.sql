@@ -153,3 +153,12 @@ CREATE TABLE `jcart_return_history` (
     index `idx_return_id` (`return_id`)
   ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 auto_increment = 1;
 #--------------------------------------------------------------------------
+  DROP TABLE IF EXISTS `jcart_product_operation`;
+CREATE TABLE `jcart_product_operation` (
+    `product_id` int NOT NULL,
+    `all_count` int not null,
+    `day_count` int not null,
+    `recent_time` datetime not null,
+    PRIMARY KEY (`product_id`)
+  ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+  #--------------------------------------------------------------------------
