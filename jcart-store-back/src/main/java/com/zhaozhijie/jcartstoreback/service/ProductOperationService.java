@@ -8,4 +8,5 @@ public interface ProductOperationService {
 
     void count(Integer productId);
 
+    List<ProductOperation> selectHotProduct();
 }

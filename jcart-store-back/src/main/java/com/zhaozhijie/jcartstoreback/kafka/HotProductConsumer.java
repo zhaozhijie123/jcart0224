@@ -1,23 +1,24 @@
-package com.zhaozhijie.jcartstoreback.service.impl;
+package com.zhaozhijie.jcartstoreback.kafka;
 
+import com.alibaba.fastjson.JSONObject;
 import com.zhaozhijie.jcartstoreback.dao.ProductOperationMapper;
+import com.zhaozhijie.jcartstoreback.mq.HotProductDTO;
 import com.zhaozhijie.jcartstoreback.po.ProductOperation;
-import com.zhaozhijie.jcartstoreback.service.ProductOperationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
-import java.util.List;
 
-@Service
-public class ProductOperationServiceImpl implements ProductOperationService {
-
+@Component
+public class HotProductConsumer {
     @Autowired
     private ProductOperationMapper productOperationMapper;
-
-
-    @Override
-    public void count(Integer productId) {
+    @KafkaListener(topics = "test")
+    public void onMessage(String stringHotProductDTOConsumerRecord) {
+        //把接收的字符串转化为实体类
+        HotProductDTO hotProductDTO = JSONObject.parseObject(stringHotProductDTOConsumerRecord, HotProductDTO.class);
+        Integer productId = hotProductDTO.getProductId();
         ProductOperation productOperation = productOperationMapper.selectByPrimaryKey(productId);
         if (productOperation == null){
             productOperation = new ProductOperation();
@@ -32,10 +33,5 @@ public class ProductOperationServiceImpl implements ProductOperationService {
             productOperation.setRecentTime(new Date());
             productOperationMapper.updateByPrimaryKeySelective(productOperation);
         }
-    }
-
-    @Override
-    public List<ProductOperation> selectHotProduct() {
-        return productOperationMapper.selectHotProduct();
     }
 }

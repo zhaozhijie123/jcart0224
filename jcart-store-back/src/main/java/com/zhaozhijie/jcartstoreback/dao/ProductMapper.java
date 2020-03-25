@@ -3,6 +3,7 @@ package com.zhaozhijie.jcartstoreback.dao;
 import com.github.pagehelper.Page;
 import com.zhaozhijie.jcartstoreback.dto.out.ProductListOutDTO;
 import com.zhaozhijie.jcartstoreback.po.Product;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -19,5 +20,5 @@ public interface ProductMapper {
 
     int updateByPrimaryKey(Product record);
 
-    Page<ProductListOutDTO> search();
+    Page<ProductListOutDTO> search(@Param("keyword") String keyword,@Param("status") byte status);
 }

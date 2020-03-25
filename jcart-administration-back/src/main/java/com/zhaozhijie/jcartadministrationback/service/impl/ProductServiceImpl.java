@@ -10,6 +10,8 @@ import com.zhaozhijie.jcartadministrationback.dto.in.ProductSearchInDTO;
 import com.zhaozhijie.jcartadministrationback.dto.in.ProductUpdateInDTO;
 import com.zhaozhijie.jcartadministrationback.dto.out.ProductListOutDTO;
 import com.zhaozhijie.jcartadministrationback.dto.out.ProductShowOutDTO;
+import com.zhaozhijie.jcartadministrationback.es.doc.ProductDoc;
+import com.zhaozhijie.jcartadministrationback.es.repository.ProductRepository;
 import com.zhaozhijie.jcartadministrationback.po.Product;
 import com.zhaozhijie.jcartadministrationback.po.ProductDetail;
 import com.zhaozhijie.jcartadministrationback.service.ProductService;
@@ -27,6 +29,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductDetailMapper productDetailMapper;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @Override
     @Transactional
@@ -53,6 +58,15 @@ public class ProductServiceImpl implements ProductService {
         List<String> otherPicUrls = productCreateInDTO.getOtherPicUrls();
         productDetail.setOtherPicUrls(JSON.toJSONString(otherPicUrls));
         productDetailMapper.insertSelective(productDetail);
+
+        ProductDoc productDoc = new ProductDoc();
+        productDoc.setProductId(productId);
+        productDoc.setProductCode(productCreateInDTO.getProductCode());
+        productDoc.setProductName(productCreateInDTO.getProductName());
+        productDoc.setProductAbstract(productCreateInDTO.getProductAbstract());
+
+        productRepository.save(productDoc);
+
         return productId;
     }
 
