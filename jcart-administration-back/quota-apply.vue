@@ -1,11 +1,11 @@
 <template>
     <process-tabs :tabs="tabs" @on-tab-toggle="onTabToggle">
         <div slot="btn">
-            <Button v-show="saveBtn" type="primary" icon="ios-checkmark-outline" @click.prevent="onSave">保存</Button>
+            <Button v-show="saveBtn" type="primary" icon="ios-checkmark-outline" @click.prevent="onSave">保存2221</Button>
             <Button v-show="submitBtn" type="primary" icon="ios-checkmark-outline" @click.prevent="onSubmit">
                 {{submitBtnTitle}}
             </Button>
-            <Button v-show="backBtn" type="primary" icon="ios-checkmark-outline" @click.prevent="onBack">返回</Button>
+            <Button v-show="backBtn" type="primary" icon="ios-checkmark-outline" @click.prevent="onBack">返回11</Button>
             <Button v-show="isNotifyTab && notifyAddBtnShow" type="primary" icon="android-mail"
                     @click.prevent="onNotify">知会
             </Button>
@@ -204,6 +204,12 @@
                     this.backBtn = false;
                 }
             },
+            parserDate(date) {
+                var t = Date.parse(date)
+                if (!isNaN(t)) {
+                    return new Date(Date.parse(date.replace(/-/g, '/')))
+                }
+            },
             getDateilData (instId, busId) {
                 this.$Spin.show(); // 加载loading
                 util.ajax.get('/process/wfQuotaApply/quotaApplyData',
@@ -217,7 +223,7 @@
                     this.baseInfo = res.data.quotaApply;
                     // 申请日期数据格式转换
                     if (this.baseInfo.applyDate != null) {
-                        this.baseInfo.applyDate = this.$formatDate(this.baseInfo.applyDate);
+                        this.baseInfo.applyDate = this.parserDate(this.$formatDate(this.baseInfo.applyDate));
                     }
                     // 担保类型数据格式转换
                     if (this.baseInfo.guaranteeType != null) {
@@ -316,7 +322,12 @@
 
                 if (valid) {
                     this.$Spin.show(); // 加载loading
-                    util.ajax.post('/process/wfQuotaApply/save', this.prepareFormData()).then(res => {
+                    let url = '/process/wfQuotaApply/save';
+                    if(this.$route.query.applicationId){
+                        url = url + '?appId='+this.$route.query.applicationId;
+                    }
+                    console.log('url:'+url);
+                    util.ajax.post(url, this.prepareFormData()).then(res => {
                         this.$Spin.hide();
                         console.log('save back data', res);
                         this.baseInfo.id = res.data.id;
@@ -324,7 +335,11 @@
                             title: '保存成功',
                             content: '您的额度申请已经保存成功。'
                         });
-                    }).catch(() => {
+                    }).catch((data) => {
+                        this.$Modal.error({
+                            title: "提交失败",
+                            content: data.response.data.reason
+                        });
                         this.$Spin.hide();
                     });
                 } else {
@@ -357,7 +372,12 @@
                 console.log(reqData);
 
                 this.$Spin.show(); // 加载loading
-                util.ajax.post('/process/wfQuotaApply/commit', reqData).then(res => {
+                let url = '/process/wfQuotaApply/commit';
+                if(this.$route.query.applicationId){
+                    url = url + '?appId='+this.$route.query.applicationId;
+                }
+                console.log('url:'+url);
+                util.ajax.post(url, reqData).then(res => {
                     this.$Spin.hide();
 
                     this.$Modal.success({
